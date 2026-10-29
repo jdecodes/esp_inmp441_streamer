@@ -1,0 +1,91 @@
+# ESP32-S3 INMP441 Microphone Recording
+
+A simple ESP32-S3 program to read audio data from an **INMP441 I2S microphone** and stream it over Wi-Fi to a Windows host.
+
+## 1. ESP32-S3 Setup
+
+Before building, update the source code with your **Wi-Fi SSID and password**.
+
+Build the firmware:
+
+```bash
+idf.py build
+```
+
+Flash the firmware to ESP32-S3:
+
+```bash
+idf.py -p COM6 -b 115200 flash
+```
+
+**Note:** Replace `COM6` with your ESP32-S3's actual serial port.
+
+## 2. Windows Host Setup
+
+All host-side code is located in the `host` folder.
+
+### Step 1: Open Command Prompt
+
+Navigate to the host directory:
+
+```cmd
+cd host
+```
+
+### Step 2: Create a Python Virtual Environment
+
+```cmd
+python -m venv .venv
+```
+
+### Step 3: Activate the Virtual Environment
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+### Step 4: Install Dependencies
+
+```cmd
+pip install -r requirements.txt
+```
+
+### Step 5: Start Recording
+
+From the `host` directory, run:
+
+```cmd
+python main.py
+```
+
+The host will receive audio data streamed from the ESP32-S3.
+
+## 3. Stop and Save Recording
+
+Press **Ctrl + C** in the terminal to stop and save the recording.
+
+Recordings are saved to:
+
+```text
+E:\mcu_recordings
+```
+
+## 4. Configuration
+
+To change the recording directory or other host-side settings, edit:
+
+```text
+host/configs.py
+```
+
+## Quick Reference
+
+| Action | Command |
+|---|---|
+| Build firmware | `idf.py build` |
+| Flash ESP32-S3 | `idf.py -p COM6 -b 115200 flash` |
+| Create virtual environment | `python -m venv .venv` |
+| Activate environment | `.venv\Scripts\activate.bat` |
+| Install dependencies | `pip install -r requirements.txt` |
+| Start recording | `python main.py` |
+| Stop and save | `Ctrl + C` |
